@@ -8,8 +8,7 @@ import Write from './Write';
 
 function App() {
   const [mode, setMode] = useState('WELCOME');
-  const [selectedId, setSelectedId] = useState(null);
-
+  const [id, setId] = useState(null);
   const topics = [
     { id: 0, title: 'html', body: 'html is ...' },
     { id: 1, title: 'css', body: 'css is ...' },
@@ -21,8 +20,8 @@ function App() {
   if (mode === 'WELCOME') {
     content = <Article title="Hi" body="Hello WEB" />
   } else if (mode === 'READ') {
-    const topic = topics.find(t => t.id === selectedId);
-    content = <Article title={topic.title} body={topic.body} />
+    const topic = topics.find(t => t.id === id);
+    content = <Article id={Number(topic.id)} title={topic.title} body={topic.body} />
   } else if (mode === 'LOGIN') {
     content = <Login onSubmit={(event) => {
       event.preventDefault();
