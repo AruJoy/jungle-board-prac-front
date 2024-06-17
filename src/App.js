@@ -35,6 +35,7 @@ function App() {
       event.preventDefault();
       console.log('Login submitted');
       setMode('WELCOME');
+      setIsLogin(true);
     }} />
   } else if (mode === 'SIGNUP') {
     content = <Signup onSubmit={(event) => {
@@ -52,7 +53,7 @@ function App() {
 
   return (
     <div>
-      <Header title="Jungle Board" onChangeMode={setMode} isLogin = {isLogin} />
+      <Header title="Jungle Board" onChangeMode={setMode} isLogin = {isLogin} setIsLogin= {setIsLogin}/>
       <button onClick={() => setMode('WRITE')}>글쓰기</button>
       {content}
     </div>

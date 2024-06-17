@@ -17,6 +17,7 @@ function LoginHandler(props) {
             () => {
               localStorage.removeItem('token');
               props.onChangeMode('WELCOME');
+              props.setIsLogin(false);
             }}>
           로그아웃</button>
       </div>
@@ -32,7 +33,7 @@ function Header(props) {
           props.onChangeMode('WELCOME');
         }}>{props.title}</a>
       </h1>
-      <LoginHandler isLogin = {props.isLogin} onChangeMode = {props.onChangeMode}/>
+      <LoginHandler isLogin = {props.isLogin} onChangeMode = {props.onChangeMode} setIsLogin = {props.setIsLogin}/>
     </header>
   );
 }
