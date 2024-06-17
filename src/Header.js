@@ -1,6 +1,28 @@
 import React from 'react';
 import './App.css';
 
+function LoginHandler(props) {
+  if (!props.isLogin) {
+    return (
+      <div className="auth-buttons">
+        <button onClick={() => props.onChangeMode('LOGIN')}>로그인</button>
+        <button onClick={() => props.onChangeMode('SIGNUP')}>회원가입</button>
+      </div>
+    );
+  } else {
+    return (
+      <div className="auth-buttons">
+        <button
+          onClick={
+            () => {
+              localStorage.removeItem('token');
+              props.onChangeMode('WELCOME');
+            }}>
+          로그아웃</button>
+      </div>
+    );
+  }
+}
 function Header(props) {
   return (
     <header>
@@ -10,10 +32,7 @@ function Header(props) {
           props.onChangeMode('WELCOME');
         }}>{props.title}</a>
       </h1>
-      <div className="auth-buttons">
-        <button onClick={() => props.onChangeMode('LOGIN')}>로그인</button>
-        <button onClick={() => props.onChangeMode('SIGNUP')}>회원가입</button>
-      </div>
+      <LoginHandler isLogin = {props.isLogin} onChangeMode = {props.onChangeMode}/>
     </header>
   );
 }
