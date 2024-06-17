@@ -1,58 +1,53 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
-
-function Nav(props) {
-  const lis = props.topics.map(t => (
-    <li key={t.id}><a href={'/read/' + t.id} onClick={(event)=>{
-      event.preventDefault();
-      props.onChangeMode(t.id);
-    }}>{t.title}</a></li>
-  ));
-  return (
-    <nav>
-      <ol>
-        {lis}
-      </ol>
-    </nav>
-  );
-}
-
-function Article(props) {
-  return (
-    <article>
-      <h2>{props.title}</h2>
-      <div>{props.body}</div>
-    </article>
-  );
-}
-
-function Header(props) {
-  console.log('props', props);
-  return (
-    <header>
-      <h1><a href="/" onClick = {(event)=>{
-        event.preventDefault();
-        props.onChangeMode();
-      }}>{props.title}</a></h1>
-    </header>
-  );
-}
+import Header from './Header';
+import Article from './Article';
+import Login from './Login';
+import Signup from './Signup';
+import Write from './Write';
 
 function App() {
+  const [mode, setMode] = useState('WELCOME');
+  const [selectedId, setSelectedId] = useState(null);
+
   const topics = [
-    {id: 0, title: 'html', body: 'html is ...'},
-    {id: 1, title: 'css', body: 'css is ...'},
-    {id: 2, title: 'javascript', body: 'javascript is ...'}
+    { id: 0, title: 'html', body: 'html is ...' },
+    { id: 1, title: 'css', body: 'css is ...' },
+    { id: 2, title: 'javascript', body: 'javascript is ...' }
   ];
+
+  let content = null;
+
+  if (mode === 'WELCOME') {
+    content = <Article title="Hi" body="Hello WEB" />
+  } else if (mode === 'READ') {
+    const topic = topics.find(t => t.id === selectedId);
+    content = <Article title={topic.title} body={topic.body} />
+  } else if (mode === 'LOGIN') {
+    content = <Login onSubmit={(event) => {
+      event.preventDefault();
+      console.log('Login submitted');
+      setMode('WELCOME');
+    }} />
+  } else if (mode === 'SIGNUP') {
+    content = <Signup onSubmit={(event) => {
+      event.preventDefault();
+      console.log('Signup submitted');
+      setMode('WELCOME');
+    }} />
+  } else if (mode === 'WRITE') {
+    content = <Write onSubmit={(event) => {
+      event.preventDefault();
+      console.log('Write submitted');
+      setMode('WELCOME');
+    }} />
+  }
+
   return (
     <div>
-      <Header title="안녕 친구야" onChangeMode = {()=>{
-        alert('Header');
-      }}/>
-      <Nav topics={topics} onChangeMode = {(id)=>{
-        alert(id);
-      }} />
-      <Article title="Hi" body="Hello WEB" />
+      <Header title="Jungle Board" onChangeMode={setMode} />
+      <button onClick={() => setMode('WRITE')}>글쓰기</button>
+      {content}
     </div>
   );
 }
