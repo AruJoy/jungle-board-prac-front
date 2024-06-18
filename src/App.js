@@ -5,6 +5,13 @@ import Article from './Article';
 import Login from './Login';
 import Signup from './Signup';
 import Write from './Write';
+function WriteButton(props){
+  if (props.isLogin){
+    return (
+      <button onClick={() => props.setMode('WRITE')}>글쓰기</button>
+    );
+  }
+}
 
 function App() {
   const [mode, setMode] = useState('WELCOME');
@@ -54,7 +61,7 @@ function App() {
   return (
     <div>
       <Header title="Jungle Board" onChangeMode={setMode} isLogin = {isLogin} setIsLogin= {setIsLogin}/>
-      <button onClick={() => setMode('WRITE')}>글쓰기</button>
+      <WriteButton setMode = {setMode} isLogin = {isLogin}></WriteButton>
       {content}
     </div>
   );
