@@ -15,7 +15,7 @@ function LoginHandler(props) {
         <button
           onClick={
             () => {
-              localStorage.removeItem('token');
+              sessionStorage.removeItem('token');
               props.onChangeMode('WELCOME');
               props.setIsLogin(false);
             }}>

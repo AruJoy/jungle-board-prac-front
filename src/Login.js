@@ -17,7 +17,7 @@ function Login(props) {
         console.log(response.data);
         const token = response.headers['authorization'];
         if (token) {
-          localStorage.setItem('token', token);
+          sessionStorage.setItem('token', token);
           setMessage('로그인이 성공적으로 완료되었습니다.');
           // axios 인스턴스에 기본 헤더 설정
           axios.defaults.headers.common['Authorization'] = token;

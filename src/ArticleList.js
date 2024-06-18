@@ -1,10 +1,25 @@
 import React from 'react';
 import './App.css';
+import axios from "axios";
+function ArticleList(props) {
+  const handleDelete = (event, postId)=>{
+    event.preventDefault();
 
-function ArticleList({ topics, onClick }) {
+    axios.delete(`http://localhost:8080/api/post/${postId}`,{
+      headers:{
+        Authorization: `${sessionStorage.getItem('token')}`
+      }
+    }).then(response =>{
+      console.log(response.data);
+      props.setMode('WELCOME');
+    }).catch(error=>{
+      console.error('There was an error deleting the post!', error);
+      alert('본인이 작성한 글만 삭제할 수 있습니다.');
+    });
+  }
   return (
     <div className="card-container">
-      {topics.map(topic => (
+      {props.topics.map(topic => (
         <div key={topic.id} className="card">
           <div className="card-header">
             <span className="username">{topic.username}</span>
@@ -16,8 +31,9 @@ function ArticleList({ topics, onClick }) {
             <span className="like-count">Likes: {topic.likeCount}</span>
             <a href="/" onClick={(e) => {
               e.preventDefault();
-              onClick(topic.id);
+              props.onClick(topic.id);
             }}>Read More</a>
+            <button onClick={(e)=> handleDelete(e,topic.id)}>삭제</button>
           </div>
         </div>
       ))}

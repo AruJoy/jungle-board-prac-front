@@ -25,7 +25,7 @@ function App() {
   const [topics, setTopics] = useState([]);
 
   useEffect(() => {
-    if (localStorage.getItem('token') != null) {
+    if (sessionStorage.getItem('token') != null) {
       setIsLogin(true);
     } else {
       setIsLogin(false);
@@ -48,7 +48,7 @@ function App() {
 
   let content = null;
   if (mode === 'WELCOME') {
-    content = <ArticleList topics={topics} onClick={(id) => {
+    content = <ArticleList setMode={setMode} topics={topics} onClick={(id) => {
       setId(id);
       setMode('READ');
     }} />

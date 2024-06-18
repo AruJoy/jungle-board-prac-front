@@ -15,7 +15,7 @@ function Write(props) {
 
     axios.post('http://localhost:8080/api/post', request, {
       headers: {
-        Authorization: `${localStorage.getItem('token')}`,
+        Authorization: `${sessionStorage.getItem('token')}`,
       },
     })
       .then(response => {
