@@ -1,165 +1,158 @@
 /* App.css */
-
-/* 전체 레이아웃 스타일 */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f4f4f9;
-  color: #333;
 }
 
-/* 헤더 스타일 */
 header {
   background-color: #333;
   color: white;
-  padding: 20px 0;
+  padding: 10px 0;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 header h1 a {
   color: white;
   text-decoration: none;
-  font-size: 2em;
-  transition: color 0.3s ease;
-}
-
-header h1 a:hover {
-  color: #ddd;
 }
 
 .auth-buttons {
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-right: 20px;
 }
 
 .auth-buttons button {
-  margin-left: 10px;
-  padding: 10px 15px;
-  background-color: #444;
+  background-color: #007bff;
   color: white;
   border: none;
+  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .auth-buttons button:hover {
-  background-color: #666;
+  background-color: #0056b3;
 }
 
-/* 네비게이션 스타일 */
-nav {
-  background-color: #444;
-  padding: 15px 0;
-  margin: 20px 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-nav ol {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.card-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
-nav ol li {
-  margin: 0 15px;
-}
-
-nav ol li a {
-  color: white;
-  text-decoration: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-nav ol li a:hover {
-  background-color: #666;
-  transform: scale(1.05);
-}
-
-/* 아티클 스타일 */
-article {
-  margin: 20px auto;
-  padding: 30px;
+.card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 80%;
   max-width: 800px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
-article h2 {
+.card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card .card-header .username {
+  font-weight: bold;
+  color: #333;
+}
+
+.card .card-header .timestamp {
+  font-size: 0.8em;
+  color: #777;
+}
+
+.card h3 {
   margin-top: 0;
   color: #333;
-  font-size: 1.5em;
 }
 
-article div {
-  line-height: 1.8;
+.card p {
+  line-height: 1.6;
   color: #666;
-  font-size: 1.1em;
 }
 
-/* 인증 컨테이너 스타일 */
-.auth-container {
-  margin: 20px auto;
-  padding: 30px;
-  max-width: 500px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+.card .actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
 }
 
-.auth-container h2 {
-  margin-top: 0;
+.card .actions .like-count {
+  font-size: 0.9em;
   color: #333;
-  text-align: center;
 }
 
-.form-group {
+.card a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.card a:hover {
+  text-decoration: underline;
+}
+
+form .form-group {
   margin-bottom: 15px;
 }
 
-.form-group label {
+form .form-group label {
   display: block;
   margin-bottom: 5px;
-  color: #555;
 }
 
-.form-group input,
-.form-group textarea {
-  width: calc(100% - 20px);
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-.form-group textarea {
-  resize: vertical;
-  height: 150px;
-}
-
-button {
+form .form-group input,
+form .form-group textarea {
   width: 100%;
-  padding: 10px;
-  background-color: #444;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+form button {
+  background-color: #007bff;
   color: white;
   border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+.write-button {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.write-button button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  font-size: 1em;
 }
 
-button:hover {
-  background-color: #666;
+.write-button button:hover {
+  background-color: #218838;
 }

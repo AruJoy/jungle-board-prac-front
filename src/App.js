@@ -1,14 +1,19 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './Header';
 import Article from './Article';
 import Login from './Login';
 import Signup from './Signup';
 import Write from './Write';
-function WriteButton(props){
-  if (props.isLogin){
+import ArticleList from './ArticleList';
+import axios from "axios";
+
+function WriteButton(props) {
+  if (props.isLogin) {
     return (
-      <button onClick={() => props.setMode('WRITE')}>글쓰기</button>
+      <div className="write-button">
+        <button onClick={() => props.setMode('WRITE')}>글쓰기</button>
+      </div>
     );
   }
 }
@@ -17,11 +22,7 @@ function App() {
   const [mode, setMode] = useState('WELCOME');
   const [id, setId] = useState(null);
   const [isLogin, setIsLogin] = useState(null);
-  const topics = [
-    { id: 0, title: 'html', body: 'html is ...' },
-    { id: 1, title: 'css', body: 'css is ...' },
-    { id: 2, title: 'javascript', body: 'javascript is ...' }
-  ];
+  const [topics, setTopics] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem('token') != null) {
@@ -31,12 +32,33 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    if (mode === 'WELCOME') {
+      axios.get('http://localhost:8080/api/posts')
+        .then(response => {
+          if (response.data.success) {
+            setTopics(response.data.response);
+          }
+        })
+        .catch(error => {
+          console.error('There was an error fetching the posts!', error);
+        });
+    }
+  }, [mode]);
+
   let content = null;
   if (mode === 'WELCOME') {
-    content = <Article title="Hi" body="Hello WEB" />
+    content = <ArticleList topics={topics} onClick={(id) => {
+      setId(id);
+      setMode('READ');
+    }} />
   } else if (mode === 'READ') {
     const topic = topics.find(t => t.id === id);
-    content = <Article id={Number(topic.id)} title={topic.title} body={topic.body} />
+    if (topic) {
+      content = <Article id={Number(topic.id)} title={topic.title} body={topic.contents} />
+    } else {
+      content = <p>Loading...</p>
+    }
   } else if (mode === 'LOGIN') {
     content = <Login onSubmit={(event) => {
       event.preventDefault();
@@ -60,8 +82,8 @@ function App() {
 
   return (
     <div>
-      <Header title="Jungle Board" onChangeMode={setMode} isLogin = {isLogin} setIsLogin= {setIsLogin}/>
-      <WriteButton setMode = {setMode} isLogin = {isLogin}></WriteButton>
+      <Header title="Jungle Board" onChangeMode={setMode} isLogin={isLogin} setIsLogin={setIsLogin} />
+      <WriteButton setMode={setMode} isLogin={isLogin} />
       {content}
     </div>
   );
