@@ -48,10 +48,10 @@ function App() {
 
   let content = null;
   if (mode === 'WELCOME') {
-    content = <ArticleList setMode={setMode} topics={topics} onClick={(id) => {
+    content = <ArticleList topics={topics} onClick={(id) => {
       setId(id);
       setMode('READ');
-    }} />
+    }} setTopics={setTopics} />
   } else if (mode === 'READ') {
     const topic = topics.find(t => t.id === id);
     if (topic) {

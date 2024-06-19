@@ -9,10 +9,12 @@ function ArticleList(props) {
       headers:{
         Authorization: `${sessionStorage.getItem('token')}`
       }
-    }).then(response =>{
+    }).then(response => {
       console.log(response.data);
-      props.setMode('WELCOME');
-    }).catch(error=>{
+      // 삭제된 게시글을 topics 상태에서 제거
+      const updatedTopics = props.topics.filter(topic => topic.id !== postId);
+      props.setTopics(updatedTopics);
+    }).catch(error => {
       console.error('There was an error deleting the post!', error);
       alert('본인이 작성한 글만 삭제할 수 있습니다.');
     });
