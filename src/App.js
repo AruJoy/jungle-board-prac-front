@@ -16,16 +16,17 @@ function WriteButton(props) {
       </div>
     );
   }
+  return null;
 }
 
 function App() {
   const [mode, setMode] = useState('WELCOME');
   const [id, setId] = useState(null);
-  const [isLogin, setIsLogin] = useState(null);
+  const [isLogin, setIsLogin] = useState(false);
   const [topics, setTopics] = useState([]);
 
   useEffect(() => {
-    if (sessionStorage.getItem('token') != null) {
+    if (sessionStorage.getItem('token')) {
       setIsLogin(true);
     } else {
       setIsLogin(false);
@@ -55,7 +56,13 @@ function App() {
   } else if (mode === 'READ') {
     const topic = topics.find(t => t.id === id);
     if (topic) {
-      content = <Article id={Number(topic.id)} title={topic.title} body={topic.contents} />
+      content = <Article
+        id={Number(topic.id)}
+        title={topic.title}
+        body={topic.contents}
+        likeCount={topic.likeCount}
+        comments={topic.commentList}
+      />
     } else {
       content = <p>Loading...</p>
     }

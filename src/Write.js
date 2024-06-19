@@ -42,7 +42,7 @@ function Write(props) {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group form-group-contents">
           <label htmlFor="contents">내용</label>
           <textarea
             id="contents"

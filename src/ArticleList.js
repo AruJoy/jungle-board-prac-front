@@ -1,24 +1,24 @@
 import React from 'react';
 import './App.css';
 import axios from "axios";
+
 function ArticleList(props) {
-  const handleDelete = (event, postId)=>{
+  const handleDelete = (event, postId) => {
     event.preventDefault();
 
-    axios.delete(`http://localhost:8080/api/post/${postId}`,{
-      headers:{
+    axios.delete(`http://localhost:8080/api/post/${postId}`, {
+      headers: {
         Authorization: `${sessionStorage.getItem('token')}`
       }
     }).then(response => {
       console.log(response.data);
-      // 삭제된 게시글을 topics 상태에서 제거
-      const updatedTopics = props.topics.filter(topic => topic.id !== postId);
-      props.setTopics(updatedTopics);
+      props.setTopics(prevTopics => prevTopics.filter(topic => topic.id !== postId));
     }).catch(error => {
       console.error('There was an error deleting the post!', error);
       alert('본인이 작성한 글만 삭제할 수 있습니다.');
     });
   }
+
   return (
     <div className="card-container">
       {props.topics.map(topic => (
@@ -35,7 +35,7 @@ function ArticleList(props) {
               e.preventDefault();
               props.onClick(topic.id);
             }}>Read More</a>
-            <button onClick={(e)=> handleDelete(e,topic.id)}>삭제</button>
+            <button onClick={(e) => handleDelete(e, topic.id)}>삭제</button>
           </div>
         </div>
       ))}
