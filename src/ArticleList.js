@@ -19,6 +19,14 @@ function ArticleList(props) {
     });
   }
 
+  const handleUpdate = (e, topic) => {
+    e.preventDefault();
+    props.setId(topic.id);
+    props.setTitle(topic.title);
+    props.setContents(topic.contents);
+    props.setMode("UPDATE");
+  }
+
   return (
     <div className="card-container">
       {props.topics.map(topic => (
@@ -35,6 +43,7 @@ function ArticleList(props) {
               e.preventDefault();
               props.onClick(topic.id);
             }}>Read More</a>
+            <button onClick={(e) => handleUpdate(e, topic)}>수정</button>
             <button onClick={(e) => handleDelete(e, topic.id)}>삭제</button>
           </div>
         </div>

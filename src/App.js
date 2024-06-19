@@ -6,6 +6,7 @@ import Login from './Login';
 import Signup from './Signup';
 import Write from './Write';
 import ArticleList from './ArticleList';
+import Update from './Update';
 import axios from "axios";
 
 function WriteButton(props) {
@@ -24,6 +25,8 @@ function App() {
   const [id, setId] = useState(null);
   const [isLogin, setIsLogin] = useState(false);
   const [topics, setTopics] = useState([]);
+  const [title, setTitle] = useState('');
+  const [contents, setContents] = useState('');
 
   useEffect(() => {
     if (sessionStorage.getItem('token')) {
@@ -49,10 +52,10 @@ function App() {
 
   let content = null;
   if (mode === 'WELCOME') {
-    content = <ArticleList topics={topics} onClick={(id) => {
+    content = <ArticleList setMode={setMode} topics={topics} onClick={(id) => {
       setId(id);
       setMode('READ');
-    }} setTopics={setTopics} />
+    }} setTopics={setTopics} setId={setId} setTitle={setTitle} setContents={setContents} />
   } else if (mode === 'READ') {
     const topic = topics.find(t => t.id === id);
     if (topic) {
@@ -83,6 +86,12 @@ function App() {
     content = <Write onSubmit={(event) => {
       event.preventDefault();
       console.log('Write submitted');
+      setMode('WELCOME');
+    }} />
+  } else if (mode === 'UPDATE') {
+    content = <Update id={id} title={title} contents={contents} onSubmit={(event) => {
+      event.preventDefault();
+      console.log('Update submitted');
       setMode('WELCOME');
     }} />
   }

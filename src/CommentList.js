@@ -12,6 +12,7 @@ function CommentList({ comments, onDelete }) {
       onDelete(commentId);
     }).catch(error => {
       console.error('There was an error deleting the comment!', error);
+      alert("본인이 작성한 댓글이 아닙니다.")
     });
   };
 
