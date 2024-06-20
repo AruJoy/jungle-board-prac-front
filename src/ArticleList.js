@@ -6,7 +6,7 @@ function ArticleList(props) {
   const handleDelete = (event, postId) => {
     event.preventDefault();
 
-    axios.delete(`http://localhost:8080/api/post/${postId}`, {
+    axios.delete(`http://jungle5105.xyz:10000/api/post/${postId}`, {
       headers: {
         Authorization: `${sessionStorage.getItem('token')}`
       }
@@ -20,11 +20,15 @@ function ArticleList(props) {
   }
 
   const handleUpdate = (e, topic) => {
-    e.preventDefault();
-    props.setId(topic.id);
-    props.setTitle(topic.title);
-    props.setContents(topic.contents);
-    props.setMode("UPDATE");
+    if(topic.username === sessionStorage.getItem("username") || sessionStorage.getItem("username") === 'admin'){
+      e.preventDefault();
+      props.setId(topic.id);
+      props.setTitle(topic.title);
+      props.setContents(topic.contents);
+      props.setMode("UPDATE");
+    }else{
+      alert("수정권한이 없습니다.")
+    }
   }
 
   return (

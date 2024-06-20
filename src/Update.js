@@ -20,7 +20,7 @@ function Update(props) {
 
     console.log('Update submitted', request);
 
-    axios.put(`http://localhost:8080/api/post/${props.id}`, request, {
+    axios.put(`http://jungle5105.xyz:10000/api/post/${props.id}`, request, {
       headers: {
         Authorization: `${sessionStorage.getItem('token')}`,
       },

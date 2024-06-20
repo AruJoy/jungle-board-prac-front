@@ -5,7 +5,7 @@ import './App.css';
 function Signup(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [admin, setAdmin] = useState(false);
+  const admin = false;
   const [message, setMessage] = useState('');
 
   const handleSubmit = (event) => {
@@ -13,7 +13,7 @@ function Signup(props) {
     const request = { username, password, admin };
     console.log('Signup submitted', request);
 
-    axios.post('http://localhost:8080/api/user/signup', request)
+    axios.post('http://jungle5105.xyz:10000/api/user/signup', request)
       .then(response => {
         console.log(response.data);
         setMessage('회원가입이 성공적으로 완료되었습니다.');

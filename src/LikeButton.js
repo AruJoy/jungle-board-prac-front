@@ -6,7 +6,7 @@ function LikeButton({ postId, fetchPostData }) {
 
   const handleLike = () => {
     setLoading(true);
-    axios.put(`http://localhost:8080/api/likes/post/${postId}`, {}, {
+    axios.put(`http://jungle5105.xyz:10000/api/likes/post/${postId}`, {}, {
       headers: {
         Authorization: `${sessionStorage.getItem('token')}`
       }

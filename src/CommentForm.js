@@ -7,12 +7,12 @@ function CommentForm({ postId, onCommentSubmit, parentCommentId = null }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios.post(`http://localhost:8080/api/comment/${postId}`, {
+    axios.post(`http://jungle5105.xyz:10000/api/comment/${postId}`, {
       contents,
       parentCommentId
     }, {
       headers: {
-        Authorization: `${sessionStorage.getItem('token')}`
+        Authorization: `${sessionStorage.getItem('token')}` // Ensure 'Bearer' is included
       }
     }).then(response => {
       console.log(response.data);

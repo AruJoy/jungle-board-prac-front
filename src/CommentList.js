@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function CommentList({ comments, onDelete }) {
   const handleDelete = (commentId) => {
-    axios.delete(`http://localhost:8080/api/comment/${commentId}`, {
+    axios.delete(`http://jungle5105.xyz:10000/api/comment/${commentId}`, {
       headers: {
         Authorization: `${sessionStorage.getItem('token')}`
       }

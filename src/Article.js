@@ -10,7 +10,7 @@ function Article(props) {
   const [likeCount, setLikeCount] = useState(props.likeCount);
 
   const fetchPostData = () => {
-    axios.get(`http://localhost:8080/api/post/${props.id}`)
+    axios.get(`http://jungle5105.xyz:10000/api/post/${props.id}`)
       .then(response => {
         if (response.data.success) {
           const updatedPost = response.data.response;
@@ -35,7 +35,7 @@ function Article(props) {
 
   useEffect(() => {
     fetchPostData();
-  }, []);
+  }, [props.id]); // []에서 props.id로 변경
 
   return (
     <div className="card-container">

@@ -13,7 +13,7 @@ function Write(props) {
 
     console.log('Write submitted', request);
 
-    axios.post('http://localhost:8080/api/post', request, {
+    axios.post('http://jungle5105.xyz:10000/api/post', request, {
       headers: {
         Authorization: `${sessionStorage.getItem('token')}`,
       },

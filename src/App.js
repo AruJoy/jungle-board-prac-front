@@ -38,7 +38,7 @@ function App() {
 
   useEffect(() => {
     if (mode === 'WELCOME') {
-      axios.get('http://localhost:8080/api/posts')
+      axios.get('http://jungle5105.xyz:10000/api/posts')
         .then(response => {
           if (response.data.success) {
             setTopics(response.data.response);

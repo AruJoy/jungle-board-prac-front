@@ -12,7 +12,7 @@ function Login(props) {
     const request = { username, password };
     console.log('Login submitted', request);
 
-    axios.post('http://localhost:8080/api/user/login', request)
+    axios.post('http://jungle5105.xyz:10000/api/user/login', request)
       .then(response => {
         console.log(response.data);
         const token = response.headers['authorization'];
